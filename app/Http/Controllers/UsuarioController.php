@@ -14,9 +14,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return view('projects.index', [
-            'projects' => auth()->user()->projects
-        ]);
+        return view('users.index');
     }
 
     /**
@@ -39,7 +37,7 @@ class UsuarioController extends Controller
     {
         $attributes = $this->validateProject();
 
-        Project::create($attributes);
+        User::create($attributes);
 
         return redirect('/users');
     }
@@ -52,8 +50,6 @@ class UsuarioController extends Controller
      */
     public function show(User $user)
     {
-        $this->authorize('update', $user);
-
         return view('users.show', compact('user'));
     }
 
@@ -65,7 +61,6 @@ class UsuarioController extends Controller
      */
     public function edit(User $user)
     {
-        $this->authorize('update', $user);
 
         return view('users.edit', compact('user'));
     }
@@ -77,7 +72,7 @@ class UsuarioController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(User $user)
     {
         $project->update($this->validateProject());
 

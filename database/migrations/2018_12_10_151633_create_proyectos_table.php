@@ -20,7 +20,7 @@ class CreateProyectosTable extends Migration
             $table->text('descripcion');
             $table->string('categoria');
             $table->string('tamano');
-            $table->string('presupuest');
+            $table->string('presupuesto');
             $table->string('free_rol');
             $table->text('habilidades');
             $table->unsignedInteger('freelancer')->default(null);

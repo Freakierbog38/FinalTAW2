@@ -14,7 +14,7 @@ class ProyectoController extends Controller
      */
     public function index()
     {
-        //
+        return view('proyectos.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class ProyectoController extends Controller
      */
     public function create()
     {
-        //
+        return view('proyecto.datosProyecto');
     }
 
     /**
@@ -33,9 +33,13 @@ class ProyectoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Proyecto $proyecto)
     {
-        //
+        $attributes = $this->validateProject();
+        
+        Proyecto::create($attributes);
+        
+        return redirect('/proyectos');
     }
 
     /**
@@ -46,7 +50,7 @@ class ProyectoController extends Controller
      */
     public function show(Proyecto $proyecto)
     {
-        //
+        return view('proyectos.show', compact('proyecto'));
     }
 
     /**
@@ -57,7 +61,7 @@ class ProyectoController extends Controller
      */
     public function edit(Proyecto $proyecto)
     {
-        //
+        return view('proyectos.edit', compact('proyecto'));
     }
 
     /**
@@ -67,9 +71,11 @@ class ProyectoController extends Controller
      * @param  \App\Proyecto  $proyecto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Proyecto $proyecto)
+    public function update(Proyecto $proyecto)
     {
-        //
+        $project->update($this->validateProject());
+
+        return redirect('/proyectos');
     }
 
     /**
@@ -80,6 +86,20 @@ class ProyectoController extends Controller
      */
     public function destroy(Proyecto $proyecto)
     {
-        //
+        $project->delete();
+
+        return redirect('/proyectos');
+    }
+
+    public function validateProject(){
+        return request()->validate([
+            'nombre' => ['required', 'min:3', 'max:255'],
+            'descripcion' => ['required', 'min:3'],
+            'categoria' => ['required', 'min:3'],
+            'tamano' => ['required', 'min:3'],
+            'presupuesto' => ['required', 'min:3'],
+            'free_rol' => ['required', 'min:3'],
+            'habilidades' => ['required', 'min:3']
+        ]);
     }
 }
