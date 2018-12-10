@@ -1,0 +1,54 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+
+body{
+    /* background-image: url(https://binuelito.files.wordpress.com/2014/08/fondocompu-01.png) */
+    background-image: url(compu01.png);
+    background-size: 1315px 600px;
+    background-attachment: fixed;
+}
+
+nav{
+    width: 100%;
+    height: 50px;
+    background: rgb(5, 5, 5)  ;
+    /* border-bottom: 1px solid #000; */
+}
+
+nav ul{
+    text-align: right;
+    padding-top: 15px; 
+    margin-top: 15px;
+}
+
+nav ul a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 19px 30px 15px 30px;
+}
+
+nav ul a:hover{
+    
+    background: rgb(97, 100, 98)  ;
+    color: #fff;
+}
+
+nav img{
+    height: 100%;
+    float: left;
+}
+
+footer {
+    background-color: rgb(2, 2, 2);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    color: white;
+  }
