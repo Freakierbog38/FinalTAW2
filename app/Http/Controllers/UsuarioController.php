@@ -14,7 +14,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        return view('projects.index', [
+            'projects' => auth()->user()->projects
+        ]);
     }
 
     /**
@@ -24,7 +26,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('crearcuenta');
     }
 
     /**
@@ -33,9 +35,13 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(User $user)
     {
-        //
+        $attributes = $this->validateProject();
+
+        Project::create($attributes);
+
+        return redirect('/users');
     }
 
     /**
@@ -46,7 +52,9 @@ class UsuarioController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $this->authorize('update', $user);
+
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -57,7 +65,9 @@ class UsuarioController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $this->authorize('update', $user);
+
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -69,7 +79,9 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $project->update($this->validateProject());
+
+        return redirect('/users');
     }
 
     /**
@@ -80,6 +92,16 @@ class UsuarioController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $project->delete();
+
+        return redirect('/users');
+    }
+
+    public function validateProject(){
+        return request()->validate([
+            'name' => ['required', 'min:3', 'max:255'],
+            'email' => ['required', 'min:3'],
+            'password' => ['required', 'min:3']
+        ]);
     }
 }

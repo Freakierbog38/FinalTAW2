@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('user', 'UsuarioController');
+
 Auth::routes();
 
 Route::get('/datos', function ( ){
